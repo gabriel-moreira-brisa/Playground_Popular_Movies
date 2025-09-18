@@ -4,12 +4,14 @@ class Movie {
   final String title; //nome do filme
   final String overview; //sobre o filme
   final String posterPath;// poster do filme
+  final double voteAverage;
 
   Movie({ // preciso de tudo
     required this.id,
     required this.title,
     required this.overview,
     required this.posterPath,
+    required this.voteAverage,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -17,7 +19,8 @@ class Movie {
       id: json['id'],
       title: json['title'],
       overview: json['overview'],
-      posterPath: json['poster_path'],
+      posterPath: json['poster_path'] ?? '',
+      voteAverage: (json['vote_average'] as num).toDouble(),
     );
   }
 }
