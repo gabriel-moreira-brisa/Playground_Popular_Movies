@@ -45,23 +45,25 @@ class _MoviesScreenState extends State<MoviesScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           return ListView.builder(
+            itemCount: _controller.movies.length,
             itemBuilder: (context, index) {
               final movie = _controller.movies[index];
-              final String fullImageUrl = 'https://image.tmdb.org/t/p/w200${movie.posterPath}';
+              final String fullImageUrl =
+                  'https://image.tmdb.org/t/p/w200${movie.posterPath}';
+
               return InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          MovieDetailScreen(movie: _controller.movies[index]),
+                      builder: (context) => MovieDetailScreen(movie: movie),
                     ),
                   );
                 },
                 child: MoviesCardWidgets(
                   movieName: movie.title,
                   movieImageUrl: fullImageUrl,
-                  movieRating: movie.voteAverage
+                  movieRating: movie.voteAverage,
                 ),
               );
             },

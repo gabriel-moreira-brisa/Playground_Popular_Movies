@@ -17,12 +17,17 @@ abstract class _MoviesControllerBase with Store {
 
   @action
   Future<void> fetchMovies() async {
-    isLoading = true; //inicia
-    final movieList = await _tmdbApi.getPopularMovies();
-    final limitedMovieList = movieList.take(15).toList();
+    isLoading = true;
+    final fullMovieList = await _tmdbApi.getPopularMovies();
+    if (fullMovieList.isNotEmpty) {
+      final limitedMovieList = fullMovieList.take(15).toList();
 
-    movies.clear();
-    movies.addAll(limitedMovieList); // adicionar os filmes na lista
+      movies.clear();
+      movies.addAll(limitedMovieList);
+    } else {
+      movies.clear();
+    }
+
     isLoading = false;
   }
 }
