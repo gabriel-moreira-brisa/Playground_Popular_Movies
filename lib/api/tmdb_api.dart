@@ -18,8 +18,15 @@ class TmdbApi {
           'language': 'pt-BR',
         },
       );
-      final List results = response.data['results'];
-      return results.map((movieJson) => Movie.fromJson(movieJson)).toList();
+        if (response.statusCode == 200 && response.data is List) {
+        // Pega apenas os 20 primeiros
+        final movie = (response.data as List)
+            .take(20) 
+            .map((showJson) => Movie.fromJson(showJson))
+            .toList();
+        return movie;
+      }
+      throw Exception('Falha ao carregar shows');
     } on DioException catch (error) {
      
      // para eu ver os erros no meu console ^-^

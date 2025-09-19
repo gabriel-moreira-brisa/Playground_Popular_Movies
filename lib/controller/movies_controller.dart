@@ -10,17 +10,19 @@ abstract class _MoviesControllerBase with Store {
   final TmdbApi _tmdbApi = TmdbApi();
 
   @observable
-  ObservableList<Movie> movies = ObservableList<Movie>();//observar a lista
+  ObservableList<Movie> movies = ObservableList<Movie>(); //observar a lista
 
   @observable
   bool isLoading = false; //para iniciar o aplicativo
 
   @action
   Future<void> fetchMovies() async {
-    isLoading = true;//inicia
+    isLoading = true; //inicia
     final movieList = await _tmdbApi.getPopularMovies();
+    final limitedMovieList = movieList.take(15).toList();
+
     movies.clear();
-    movies.addAll(movieList);// adicionar os filmes na lista
+    movies.addAll(limitedMovieList); // adicionar os filmes na lista
     isLoading = false;
   }
 }
