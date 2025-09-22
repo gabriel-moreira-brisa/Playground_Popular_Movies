@@ -1,4 +1,3 @@
-
 class Movie {
   final int id; //id disponível na api
   final String title; //nome do filme

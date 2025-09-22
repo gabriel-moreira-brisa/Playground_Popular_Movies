@@ -45,8 +45,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
             return const Center(child: CircularProgressIndicator());
           }
           return ListView.builder(
-            itemCount: _controller.movies.length,
-            itemBuilder: (context, index) {
+            itemCount: _controller.movies.length, // o itemCount é basicamente ver até onde da lista a variável irá buscar.(no caso passar por cada filme) 
+            itemBuilder: (context, index) { //o intemBuilder espera um contexo e a variável que vai ser gerada e utilizada dentro do ListView, estou usando para poder pegar todos os filmes da minha lista.
+
               final movie = _controller.movies[index];
               final String fullImageUrl =
                   'https://image.tmdb.org/t/p/w200${movie.posterPath}';
